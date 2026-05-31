@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Forecasting | Amdox ERP Suite</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%236C5CE7'/><text x='50' y='68' font-size='50' font-weight='bold' text-anchor='middle' fill='white'>A</text></svg>">
+</head>
+<body>
+    
+    <div class="app-container" id="dashboard-page">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+
+            <div class="brand-logo" style="display: flex; align-items: center; gap: 8px;">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="40" rx="8" fill="url(#paint0_linear)"/>
+                    <path d="M20 10L30 20L20 30L10 20L20 10Z" fill="white" fill-opacity="0.9"/>
+                    <path d="M10 10L15 15" stroke="white" stroke-width="2"/>
+                    <defs>
+                        <linearGradient id="paint0_linear" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#FF512F"/>
+                            <stop offset="1" stop-color="#F09819"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h2 style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: 24px; letter-spacing: 1px; margin: 0; background: -webkit-linear-gradient(#FF512F, #F09819); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">AMDOX</h2>
+            </div>
+
+</div>
+            <ul class="sidebar-nav">
+                <li><a href="dashboard.html"><span class="nav-icon">🏠</span> Dashboard</a></li>
+                <li><a href="hr.html" class=""><span class="nav-icon">👥</span> HR & Payroll</a></li>
+                <li><a href="finance.html" class=""><span class="nav-icon">💰</span> Finance</a></li>
+                <li><a href="supply.html" class=""><span class="nav-icon">📦</span> Supply Chain</a></li>
+                <li><a href="projects.html" class=""><span class="nav-icon">📊</span> Projects</a></li>
+                <li><a href="forecast.html" class="active"><span class="nav-icon">📈</span> AI Forecast</a></li>
+                <li><a href="analytics.html" class=""><span class="nav-icon">📉</span> Analytics</a></li>
+            </ul>
+        </aside>
+        
+        <main class="main-content">
+            <nav class="dashboard-nav" aria-label="Main navigation">
+                <div class="nav-user">
+                    <span id="nav-user-name" class="text-muted" style="font-size: var(--font-sm);"></span>
+                    <div id="nav-avatar" class="nav-avatar"></div>
+                    <button id="logout-btn" class="btn-logout" aria-label="Sign out">Sign Out</button>
+                </div>
+            </nav>
+            
+            <div class="dashboard-content">
+
+            <div class="page-header"><h1>🤖 AI-Powered Financial Forecast</h1></div>
+            <div class="stats-row">
+                <div class="stat-card"><div class="stat-icon">📈</div><div><span class="stat-value" id="s-avg-rev">—</span><span class="stat-label">Avg Monthly Revenue</span></div></div>
+                <div class="stat-card"><div class="stat-icon">📉</div><div><span class="stat-value" id="s-avg-exp">—</span><span class="stat-label">Avg Monthly Expenses</span></div></div>
+                <div class="stat-card"><div class="stat-icon">🎯</div><div><span class="stat-value" id="s-next-rev">—</span><span class="stat-label">Next Month Forecast (Rev)</span></div></div>
+                <div class="stat-card"><div class="stat-icon">🔮</div><div><span class="stat-value" id="s-conf">—</span><span class="stat-label">Confidence Score</span></div></div>
+            </div>
+            <div class="charts-grid">
+                <div class="chart-card" style="grid-column: 1 / -1"><h3>Revenue Forecast — Historical + Predicted (6 Months)</h3><div class="chart-container" style="height:350px"><canvas id="chart-forecast"></canvas></div></div>
+                <div class="chart-card"><h3>Expense Forecast</h3><div class="chart-container"><canvas id="chart-exp-forecast"></canvas></div></div>
+                <div class="chart-card"><h3>Forecast Confidence</h3><div class="chart-container"><canvas id="chart-confidence"></canvas></div></div>
+            </div>
+            <h2 style="font-size:var(--font-xl);color:var(--text-secondary);margin-bottom:var(--space-lg)">🧠 AI Insights</h2>
+            <div class="insights-grid" id="insights-grid"></div>
+        </div>
+    </div>
+    <script src="js/app.js"></script><script src="js/auth.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        if (!requireAuth()) return;
+        const user = getStoredUser(); if (user) { document.getElementById('nav-user-name').textContent = user.full_name||user.email; document.getElementById('nav-avatar').textContent = getUserInitials(user.full_name); }
+        const token = () => localStorage.getItem(APP_CONFIG.TOKEN_KEY);
+        const fmt = (n) => '₹' + Number(n).toLocaleString('en-IN');
+        Chart.defaults.color = '#8B8BA7';
+        Chart.defaults.borderColor = 'rgba(255,255,255,0.05)';
+
+        const r = await fetch(`${APP_CONFIG.API_BASE}/analytics/forecast`, { headers: { 'Authorization': `Bearer ${token()}` } }).then(r => r.json());
+        if (!r.success) return;
+
+        const { historical, forecast, insights } = r.data;
+        const fmtMonth = (m) => { const [y, mo] = m.split('-'); return new Date(y, mo-1).toLocaleString('default', { month: 'short', year: '2-digit' }); };
+
+
+        const avgRev = historical.income.length ? historical.income.reduce((s,d)=>s+d.total,0)/historical.income.length : 0;
+        const avgExp = historical.expenses.length ? historical.expenses.reduce((s,d)=>s+d.total,0)/historical.expenses.length : 0;
+        document.getElementById('s-avg-rev').textContent = fmt(Math.round(avgRev));
+        document.getElementById('s-avg-exp').textContent = fmt(Math.round(avgExp));
+        document.getElementById('s-next-rev').textContent = forecast.income.length ? fmt(forecast.income[0].total) : '—';
+        document.getElementById('s-conf').textContent = forecast.income.length ? forecast.income[0].confidence + '%' : '—';
+
+
+        const histLabels = historical.income.map(d => fmtMonth(d.month));
+        const foreLabels = forecast.income.map(d => fmtMonth(d.month));
+        const allLabels = [...histLabels, ...foreLabels];
+        const histData = historical.income.map(d => d.total);
+        const foreData = [...new Array(histData.length).fill(null), ...forecast.income.map(d => d.total)];
+        const bridgeData = [...new Array(Math.max(0, histData.length - 1)).fill(null), histData[histData.length - 1], forecast.income.length ? forecast.income[0].total : null, ...new Array(Math.max(0, forecast.income.length - 1)).fill(null)];
+
+        new Chart(document.getElementById('chart-forecast'), {
+            type: 'line',
+            data: {
+                labels: allLabels,
+                datasets: [
+                    { label: 'Historical Revenue', data: [...histData, ...new Array(foreLabels.length).fill(null)], borderColor: '#51CF66', backgroundColor: 'rgba(81,207,102,0.1)', fill: true, tension: 0.4, pointRadius: 5, pointBackgroundColor: '#51CF66' },
+                    { label: 'Predicted Revenue', data: foreData, borderColor: '#6C5CE7', backgroundColor: 'rgba(108,92,231,0.1)', fill: true, borderDash: [8, 4], tension: 0.4, pointRadius: 5, pointBackgroundColor: '#6C5CE7' }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top' } }, scales: { y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.03)' } }, x: { grid: { display: false } } } }
+        });
+
+
+        const histExpLabels = historical.expenses.map(d => fmtMonth(d.month));
+        const foreExpLabels = forecast.expenses.map(d => fmtMonth(d.month));
+        new Chart(document.getElementById('chart-exp-forecast'), {
+            type: 'line',
+            data: {
+                labels: [...histExpLabels, ...foreExpLabels],
+                datasets: [
+                    { label: 'Historical', data: [...historical.expenses.map(d=>d.total), ...new Array(foreExpLabels.length).fill(null)], borderColor: '#FF6B6B', backgroundColor: 'rgba(255,107,107,0.1)', fill: true, tension: 0.4, pointRadius: 4 },
+                    { label: 'Predicted', data: [...new Array(histExpLabels.length).fill(null), ...forecast.expenses.map(d=>d.total)], borderColor: '#FF6B9D', borderDash: [8,4], backgroundColor: 'rgba(255,107,157,0.1)', fill: true, tension: 0.4, pointRadius: 4 }
+                ]
+            },
+            options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.03)' } }, x: { grid: { display: false } } } }
+        });
+
+
+        if (forecast.income.length) {
+            new Chart(document.getElementById('chart-confidence'), {
+                type: 'bar',
+                data: {
+                    labels: forecast.income.map(d => fmtMonth(d.month)),
+                    datasets: [{ label: 'Confidence %', data: forecast.income.map(d => d.confidence), backgroundColor: forecast.income.map(d => d.confidence >= 80 ? 'rgba(81,207,102,0.6)' : d.confidence >= 60 ? 'rgba(255,193,7,0.6)' : 'rgba(255,107,107,0.6)'), borderRadius: 6 }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 0, max: 100, grid: { color: 'rgba(255,255,255,0.03)' } }, x: { grid: { display: false } } } }
+            });
+        }
+
+
+        const insightsGrid = document.getElementById('insights-grid');
+        insightsGrid.innerHTML = insights.map(i => `<div class="insight-card insight-${i.type}"><div class="insight-icon">${i.icon}</div><h4>${i.title}</h4><p>${i.text}</p></div>`).join('');
+
+        document.getElementById('logout-btn').addEventListener('click', async () => { await AuthAPI.logout(); window.location.replace('login.html'); });
+    });
+    </script>
+    </div>
+        </main>
+    </div>
+</body>
+</html>

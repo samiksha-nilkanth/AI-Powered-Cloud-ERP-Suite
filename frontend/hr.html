@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR & Payroll | Amdox ERP Suite</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%236C5CE7'/><text x='50' y='68' font-size='50' font-weight='bold' text-anchor='middle' fill='white'>A</text></svg>">
+</head>
+<body>
+    
+    <div class="app-container" id="dashboard-page">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+
+            <div class="brand-logo" style="display: flex; align-items: center; gap: 8px;">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="40" rx="8" fill="url(#paint0_linear)"/>
+                    <path d="M20 10L30 20L20 30L10 20L20 10Z" fill="white" fill-opacity="0.9"/>
+                    <path d="M10 10L15 15" stroke="white" stroke-width="2"/>
+                    <defs>
+                        <linearGradient id="paint0_linear" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#FF512F"/>
+                            <stop offset="1" stop-color="#F09819"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h2 style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: 24px; letter-spacing: 1px; margin: 0; background: -webkit-linear-gradient(#FF512F, #F09819); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">AMDOX</h2>
+            </div>
+
+</div>
+            <ul class="sidebar-nav">
+                <li><a href="dashboard.html"><span class="nav-icon">🏠</span> Dashboard</a></li>
+                <li><a href="hr.html" class="active"><span class="nav-icon">👥</span> HR & Payroll</a></li>
+                <li><a href="finance.html" class=""><span class="nav-icon">💰</span> Finance</a></li>
+                <li><a href="supply.html" class=""><span class="nav-icon">📦</span> Supply Chain</a></li>
+                <li><a href="projects.html" class=""><span class="nav-icon">📊</span> Projects</a></li>
+                <li><a href="forecast.html" class=""><span class="nav-icon">📈</span> AI Forecast</a></li>
+                <li><a href="analytics.html" class=""><span class="nav-icon">📉</span> Analytics</a></li>
+            </ul>
+        </aside>
+        
+        <main class="main-content">
+            <nav class="dashboard-nav" aria-label="Main navigation">
+                <div class="nav-user">
+                    <span id="nav-user-name" class="text-muted" style="font-size: var(--font-sm);"></span>
+                    <div id="nav-avatar" class="nav-avatar"></div>
+                    <button id="logout-btn" class="btn-logout" aria-label="Sign out">Sign Out</button>
+                </div>
+            </nav>
+            
+                        <div class="dashboard-content">
+                <div class="page-header" style="margin-bottom:var(--space-md);">
+                    <h1 style="font-size:var(--font-xxl);">👥 HR & Payroll Engine</h1>
+                    <p style="color:var(--text-muted); margin-top:4px;">Manage employee lifecycle, attendance, payroll processing, and compliance.</p>
+                </div>
+                
+                <div class="dashboard-tabs" id="module-tabs">
+                    <button class="tab-btn active" data-tab="tab-employees">Employee Directory</button>
+                    <button class="tab-btn" data-tab="tab-leave">Leave Management</button>
+                    <button class="tab-btn" data-tab="tab-payroll">Payroll Processing</button>
+                    <button class="tab-btn" data-tab="tab-onboarding">Onboarding</button>
+                </div>
+
+                <div id="tab-employees" class="tab-content active">
+                    <div class="stats-row">
+                        <div class="stat-card"><div class="stat-icon">👥</div><div><span class="stat-value" id="s-total">—</span><span class="stat-label">Total Employees</span></div></div>
+                        <div class="stat-card"><div class="stat-icon">✅</div><div><span class="stat-value" id="s-active">—</span><span class="stat-label">Active</span></div></div>
+                        <div class="stat-card"><div class="stat-icon">🏢</div><div><span class="stat-value" id="s-depts">—</span><span class="stat-label">Departments</span></div></div>
+                        <div class="stat-card"><div class="stat-icon">💵</div><div><span class="stat-value" id="s-payroll">—</span><span class="stat-label">Monthly Payroll</span></div></div>
+                    </div>
+                    <div class="action-bar">
+                        <input type="text" class="search-input" id="search" placeholder="Search employees...">
+                        <select class="filter-select" id="filter-dept"><option value="">All Departments</option></select>
+                        <select class="filter-select" id="filter-status"><option value="">All Status</option><option value="active">Active</option><option value="on_leave">On Leave</option><option value="terminated">Terminated</option></select>
+                        <button class="btn-add" id="btn-add">+ Add Employee</button>
+                    </div>
+                    <div class="data-cards" id="emp-grid"></div>
+                </div>
+
+                <div id="tab-leave" class="tab-content">
+                    <div class="coming-soon-placeholder">
+                        <div class="coming-soon-icon">🏖️</div>
+                        <h3>Leave Management</h3>
+                        <p>Process absence requests, manage accrual rules, and configure approval workflows with multi-level state machines.</p>
+                        <span class="module-status" style="margin-top: 16px;">AI Engine Integration Pending</span>
+                    </div>
+                </div>
+
+                <div id="tab-payroll" class="tab-content">
+                    <div class="coming-soon-placeholder">
+                        <div class="coming-soon-icon">💸</div>
+                        <h3>Payroll Engine</h3>
+                        <p>Automate gross-to-net payroll calculations, generate PDF payslips, and ensure real-time statutory tax compliance.</p>
+                        <span class="module-status" style="margin-top: 16px;">Backend Processing Node Offline</span>
+                    </div>
+                </div>
+
+                <div id="tab-onboarding" class="tab-content">
+                    <div class="coming-soon-placeholder">
+                        <div class="coming-soon-icon">🚀</div>
+                        <h3>Onboarding & Compliance</h3>
+                        <p>Manage new hire checklists, document uploads, and automated IT provisioning through intelligent workflows.</p>
+                        <span class="module-status" style="margin-top: 16px;">Workflow Engine Uninitialized</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="modal-overlay" id="modal">
+        <div class="modal">
+            <button class="modal-close" id="modal-close">✕</button>
+            <h2 id="modal-title">Add Employee</h2>
+            <form id="emp-form" class="modal-form">
+                <input type="hidden" id="f-id">
+                <div class="form-row"><div class="form-group"><label>Employee Code</label><input class="form-input" id="f-code" placeholder="AMX-XXX" required></div><div class="form-group"><label>Full Name</label><input class="form-input" id="f-name" required></div></div>
+                <div class="form-row"><div class="form-group"><label>Email</label><input type="email" class="form-input" id="f-email" required></div><div class="form-group"><label>Phone</label><input class="form-input" id="f-phone"></div></div>
+                <div class="form-row"><div class="form-group"><label>Department</label><input class="form-input" id="f-dept" required></div><div class="form-group"><label>Position</label><input class="form-input" id="f-position" required></div></div>
+                <div class="form-row"><div class="form-group"><label>Monthly Salary (₹)</label><input type="number" class="form-input" id="f-salary" step="1000"></div><div class="form-group"><label>Hire Date</label><input type="date" class="form-input" id="f-hire" required></div></div>
+                <button type="submit" class="btn btn-primary" style="margin-top:var(--space-md)"><span class="btn-text">Save Employee</span></button>
+            </form>
+        </div>
+    </div>
+    <script src="js/app.js"></script><script src="js/auth.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        if (!requireAuth()) return;
+        const user = getStoredUser();
+        if (user) { document.getElementById('nav-user-name').textContent = user.full_name || user.email; document.getElementById('nav-avatar').textContent = getUserInitials(user.full_name); }
+        const token = () => localStorage.getItem(APP_CONFIG.TOKEN_KEY);
+        const api = (p) => fetch(`${APP_CONFIG.API_BASE}${p}`, { headers: { 'Authorization': `Bearer ${token()}` } }).then(r => r.json());
+        const fmt = (n) => '₹' + Number(n).toLocaleString('en-IN');
+
+        async function loadSummary() {
+            const r = await api('/hr/summary');
+            if (r.success) {
+                document.getElementById('s-total').textContent = r.data.total;
+                document.getElementById('s-active').textContent = r.data.active;
+                document.getElementById('s-depts').textContent = r.data.departments.length;
+                document.getElementById('s-payroll').textContent = fmt(r.data.monthlyPayroll);
+                const sel = document.getElementById('filter-dept');
+                const cur = sel.value;
+                sel.innerHTML = '<option value="">All Departments</option>' + r.data.departments.map(d => `<option value="${d}">${d}</option>`).join('');
+                sel.value = cur;
+            }
+        }
+
+        async function loadEmployees() {
+            const dept = document.getElementById('filter-dept').value;
+            const status = document.getElementById('filter-status').value;
+            const search = document.getElementById('search').value;
+            let url = '/hr/employees?';
+            if (dept) url += `department=${encodeURIComponent(dept)}&`;
+            if (status) url += `status=${status}&`;
+            if (search) url += `search=${encodeURIComponent(search)}&`;
+            const r = await api(url);
+            const grid = document.getElementById('emp-grid');
+            if (!r.success || !r.data.length) { grid.innerHTML = '<div class="empty-state"><div class="empty-icon">👤</div><p>No employees found</p></div>'; return; }
+            grid.innerHTML = r.data.map(e => `<div class="data-card">
+                <div class="data-card-header"><div><h3>${e.full_name}</h3><span style="color:var(--text-muted);font-size:var(--font-xs)">${e.employee_code}</span></div><span class="badge badge-${e.status}">${e.status.replace('_',' ')}</span></div>
+                <div class="data-card-meta"><span>📧 ${e.email}</span><span>🏢 ${e.department} · ${e.position}</span><span>💰 ${fmt(e.salary)}/month</span><span>📅 Hired: ${e.hire_date}</span></div>
+                <div class="data-card-actions"><button class="btn-sm" onclick='editEmp(${JSON.stringify(e).replace(/'/g,"&#39;")})'>Edit</button><button class="btn-sm btn-danger" onclick="delEmp('${e.id}')">Delete</button></div>
+            </div>`).join('');
+        }
+
+        window.editEmp = (e) => {
+            document.getElementById('modal-title').textContent = 'Edit Employee';
+            document.getElementById('f-id').value = e.id;
+            document.getElementById('f-code').value = e.employee_code; document.getElementById('f-code').disabled = true;
+            document.getElementById('f-name').value = e.full_name; document.getElementById('f-email').value = e.email;
+            document.getElementById('f-phone').value = e.phone || ''; document.getElementById('f-dept').value = e.department;
+            document.getElementById('f-position').value = e.position; document.getElementById('f-salary').value = e.salary;
+            document.getElementById('f-hire').value = e.hire_date;
+            document.getElementById('modal').classList.add('visible');
+        };
+        window.delEmp = async (id) => { if (!confirm('Delete?')) return; await fetch(`${APP_CONFIG.API_BASE}/hr/employees/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token()}` } }); loadAll(); showToast('Employee deleted'); };
+
+        function loadAll() { loadSummary(); loadEmployees(); }
+        loadAll();
+
+        document.getElementById('filter-dept').addEventListener('change', loadEmployees);
+        document.getElementById('filter-status').addEventListener('change', loadEmployees);
+        let t; document.getElementById('search').addEventListener('input', () => { clearTimeout(t); t = setTimeout(loadEmployees, 300); });
+
+        const modal = document.getElementById('modal');
+        document.getElementById('btn-add').addEventListener('click', () => { document.getElementById('modal-title').textContent = 'Add Employee'; document.getElementById('emp-form').reset(); document.getElementById('f-id').value = ''; document.getElementById('f-code').disabled = false; document.getElementById('f-hire').value = new Date().toISOString().split('T')[0]; modal.classList.add('visible'); });
+        document.getElementById('modal-close').addEventListener('click', () => modal.classList.remove('visible'));
+        modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('visible'); });
+
+        document.getElementById('emp-form').addEventListener('submit', async (ev) => {
+            ev.preventDefault();
+            const id = document.getElementById('f-id').value;
+            const body = { employee_code: document.getElementById('f-code').value, full_name: document.getElementById('f-name').value, email: document.getElementById('f-email').value, phone: document.getElementById('f-phone').value, department: document.getElementById('f-dept').value, position: document.getElementById('f-position').value, salary: document.getElementById('f-salary').value, hire_date: document.getElementById('f-hire').value };
+            const method = id ? 'PUT' : 'POST';
+            const url = id ? `${APP_CONFIG.API_BASE}/hr/employees/${id}` : `${APP_CONFIG.API_BASE}/hr/employees`;
+            await fetch(url, { method, headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token()}` }, body: JSON.stringify(body) });
+            modal.classList.remove('visible');
+            showToast(id ? 'Employee updated' : 'Employee added');
+            loadAll();
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', async () => { await AuthAPI.logout(); window.location.replace('login.html'); });
+    });
+    </script>
+</body>
+</html>

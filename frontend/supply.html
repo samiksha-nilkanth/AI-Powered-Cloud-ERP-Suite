@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply Chain | Amdox ERP Suite</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%236C5CE7'/><text x='50' y='68' font-size='50' font-weight='bold' text-anchor='middle' fill='white'>A</text></svg>">
+</head>
+<body>
+    
+    <div class="app-container" id="dashboard-page">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+
+            <div class="brand-logo" style="display: flex; align-items: center; gap: 8px;">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="40" rx="8" fill="url(#paint0_linear)"/>
+                    <path d="M20 10L30 20L20 30L10 20L20 10Z" fill="white" fill-opacity="0.9"/>
+                    <path d="M10 10L15 15" stroke="white" stroke-width="2"/>
+                    <defs>
+                        <linearGradient id="paint0_linear" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#FF512F"/>
+                            <stop offset="1" stop-color="#F09819"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h2 style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: 24px; letter-spacing: 1px; margin: 0; background: -webkit-linear-gradient(#FF512F, #F09819); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">AMDOX</h2>
+            </div>
+
+</div>
+            <ul class="sidebar-nav">
+                <li><a href="dashboard.html"><span class="nav-icon">🏠</span> Dashboard</a></li>
+                <li><a href="hr.html" class=""><span class="nav-icon">👥</span> HR & Payroll</a></li>
+                <li><a href="finance.html" class=""><span class="nav-icon">💰</span> Finance</a></li>
+                <li><a href="supply.html" class="active"><span class="nav-icon">📦</span> Supply Chain</a></li>
+                <li><a href="projects.html" class=""><span class="nav-icon">📊</span> Projects</a></li>
+                <li><a href="forecast.html" class=""><span class="nav-icon">📈</span> AI Forecast</a></li>
+                <li><a href="analytics.html" class=""><span class="nav-icon">📉</span> Analytics</a></li>
+            </ul>
+        </aside>
+        
+        <main class="main-content">
+            <nav class="dashboard-nav" aria-label="Main navigation">
+                <div class="nav-user">
+                    <span id="nav-user-name" class="text-muted" style="font-size: var(--font-sm);"></span>
+                    <div id="nav-avatar" class="nav-avatar"></div>
+                    <button id="logout-btn" class="btn-logout" aria-label="Sign out">Sign Out</button>
+                </div>
+            </nav>
+            
+                        <div class="dashboard-content">
+                <div class="page-header" style="margin-bottom:var(--space-md);">
+                    <h1 style="font-size:var(--font-xxl);">📦 Supply Chain</h1>
+                    <p style="color:var(--text-muted); margin-top:4px;">PO lifecycle, vendor portal, real-time stock levels, and reorder automation.</p>
+                </div>
+                
+                <div class="dashboard-tabs" id="module-tabs">
+                    <button class="tab-btn active" data-tab="tab-inventory">Inventory Management</button>
+                    <button class="tab-btn" data-tab="tab-po">PO Lifecycle</button>
+                    <button class="tab-btn" data-tab="tab-vendor">Vendor Portal</button>
+                    <button class="tab-btn" data-tab="tab-reorder">Reorder Automation</button>
+                </div>
+
+                <div id="tab-inventory" class="tab-content active">
+                    <div class="stats-row">
+                        <div class="stat-card"><div class="stat-icon">📦</div><div><span class="stat-value" id="s-total">—</span><span class="stat-label">Total Items</span></div></div>
+                        <div class="stat-card"><div class="stat-icon">⚠️</div><div><span class="stat-value" id="s-low">—</span><span class="stat-label">Low Stock Alerts</span></div></div>
+                        <div class="stat-card"><div class="stat-icon">💎</div><div><span class="stat-value" id="s-value">—</span><span class="stat-label">Total Inventory Value</span></div></div>
+                        <div class="stat-card"><div class="stat-icon">📁</div><div><span class="stat-value" id="s-cats">—</span><span class="stat-label">Categories</span></div></div>
+                    </div>
+                    <div class="action-bar">
+                        <input type="text" class="search-input" id="search" placeholder="Search items, SKU, supplier...">
+                        <select class="filter-select" id="filter-cat"><option value="">All Categories</option></select>
+                        <select class="filter-select" id="filter-stock"><option value="">All Stock</option><option value="low">Low Stock Only</option></select>
+                        <button class="btn-add" id="btn-add">+ Add Item</button>
+                    </div>
+                    <div class="data-table-wrapper"><table class="data-table"><thead><tr><th>Item</th><th>SKU</th><th>Category</th><th>Stock</th><th>Reorder Level</th><th>Unit Price</th><th>Supplier</th><th>Actions</th></tr></thead><tbody id="table-body"></tbody></table></div>
+                </div>
+
+                <div id="tab-po" class="tab-content">
+                    <div class="coming-soon-placeholder">
+                        <div class="coming-soon-icon">📑</div>
+                        <h3>Purchase Order Lifecycle</h3>
+                        <p>End-to-end workflow from purchase requisition to PO generation and goods receipt.</p>
+                        <span class="module-status" style="margin-top: 16px;">Approval Engine Offline</span>
+                    </div>
+                </div>
+
+                <div id="tab-vendor" class="tab-content">
+                    <div class="coming-soon-placeholder">
+                        <div class="coming-soon-icon">🤝</div>
+                        <h3>Vendor Portal</h3>
+                        <p>Self-service portal for vendors, automated supplier notifications via email and webhook.</p>
+                        <span class="module-status" style="margin-top: 16px;">External API Disconnected</span>
+                    </div>
+                </div>
+
+                <div id="tab-reorder" class="tab-content">
+                    <div class="coming-soon-placeholder">
+                        <div class="coming-soon-icon">⚡</div>
+                        <h3>Reorder Automation</h3>
+                        <p>Trigger PO drafts automatically when stock falls below configured threshold levels.</p>
+                        <span class="module-status" style="margin-top: 16px;">BullMQ Job Queue Suspended</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="modal-overlay" id="modal"><div class="modal"><button class="modal-close" id="modal-close">✕</button><h2 id="modal-title">Add Item</h2>
+        <form id="item-form" class="modal-form"><input type="hidden" id="f-id">
+            <div class="form-row"><div class="form-group"><label>Item Name</label><input class="form-input" id="f-name" required></div><div class="form-group"><label>SKU</label><input class="form-input" id="f-sku" required></div></div>
+            <div class="form-row"><div class="form-group"><label>Category</label><input class="form-input" id="f-cat" required></div><div class="form-group"><label>Supplier</label><input class="form-input" id="f-supplier"></div></div>
+            <div class="form-row"><div class="form-group"><label>Quantity</label><input type="number" class="form-input" id="f-qty" min="0"></div><div class="form-group"><label>Reorder Level</label><input type="number" class="form-input" id="f-reorder" min="0"></div></div>
+            <div class="form-row"><div class="form-group"><label>Unit Price (₹)</label><input type="number" class="form-input" id="f-price" step="0.01"></div><div class="form-group"><label>Location</label><input class="form-input" id="f-loc"></div></div>
+            <button type="submit" class="btn btn-primary" style="margin-top:var(--space-md)"><span class="btn-text">Save Item</span></button>
+        </form></div></div>
+    <script src="js/app.js"></script><script src="js/auth.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        if (!requireAuth()) return;
+        const user = getStoredUser();
+        if (user) { document.getElementById('nav-user-name').textContent = user.full_name||user.email; document.getElementById('nav-avatar').textContent = getUserInitials(user.full_name); }
+        const token = () => localStorage.getItem(APP_CONFIG.TOKEN_KEY);
+        const api = (p) => fetch(`${APP_CONFIG.API_BASE}${p}`, { headers: { 'Authorization': `Bearer ${token()}` } }).then(r => r.json());
+        const fmt = (n) => '₹' + Number(n).toLocaleString('en-IN');
+
+        async function loadSummary() {
+            const r = await api('/supply/summary');
+            if (r.success) {
+                document.getElementById('s-total').textContent = r.data.totalItems;
+                document.getElementById('s-low').textContent = r.data.lowStockAlerts;
+                document.getElementById('s-value').textContent = fmt(r.data.totalValue);
+                document.getElementById('s-cats').textContent = r.data.categories.length;
+                const sel = document.getElementById('filter-cat');
+                const cur = sel.value;
+                sel.innerHTML = '<option value="">All Categories</option>' + r.data.categories.map(c => `<option value="${c}">${c}</option>`).join('');
+                sel.value = cur;
+            }
+        }
+
+        async function loadItems() {
+            const cat = document.getElementById('filter-cat').value;
+            const stock = document.getElementById('filter-stock').value;
+            const search = document.getElementById('search').value;
+            let url = '/supply/items?';
+            if (cat) url += `category=${encodeURIComponent(cat)}&`;
+            if (stock) url += `stock=${stock}&`;
+            if (search) url += `search=${encodeURIComponent(search)}&`;
+            const r = await api(url);
+            const tbody = document.getElementById('table-body');
+            if (!r.success || !r.data.length) { tbody.innerHTML = '<tr><td colspan="8"><div class="empty-state"><div class="empty-icon">📦</div><p>No items found</p></div></td></tr>'; return; }
+            tbody.innerHTML = r.data.map(i => {
+                const pct = Math.min(100, (i.quantity / Math.max(i.reorder_level * 2, 1)) * 100);
+                const cls = i.quantity <= i.reorder_level ? (i.quantity <= i.reorder_level / 2 ? 'stock-danger' : 'stock-warning') : 'stock-ok';
+                return `<tr>
+                    <td><strong>${i.name}</strong></td><td style="color:var(--text-muted)">${i.sku}</td><td>${i.category}</td>
+                    <td><div>${i.quantity} units</div><div class="stock-bar"><div class="stock-fill ${cls}" style="width:${pct}%"></div></div></td>
+                    <td>${i.reorder_level}</td><td>${fmt(i.unit_price)}</td><td style="color:var(--text-muted)">${i.supplier||'—'}</td>
+                    <td><button class="btn-sm" onclick='editItem(${JSON.stringify(i).replace(/'/g,"&#39;")})'>Edit</button> <button class="btn-sm btn-danger" onclick="delItem('${i.id}')">Del</button></td>
+                </tr>`;
+            }).join('');
+        }
+
+        window.editItem = (i) => {
+            document.getElementById('modal-title').textContent = 'Edit Item';
+            document.getElementById('f-id').value = i.id; document.getElementById('f-name').value = i.name;
+            document.getElementById('f-sku').value = i.sku; document.getElementById('f-sku').disabled = true;
+            document.getElementById('f-cat').value = i.category; document.getElementById('f-supplier').value = i.supplier||'';
+            document.getElementById('f-qty').value = i.quantity; document.getElementById('f-reorder').value = i.reorder_level;
+            document.getElementById('f-price').value = i.unit_price; document.getElementById('f-loc').value = i.location||'';
+            document.getElementById('modal').classList.add('visible');
+        };
+        window.delItem = async (id) => { if (!confirm('Delete?')) return; await fetch(`${APP_CONFIG.API_BASE}/supply/items/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token()}` } }); loadAll(); showToast('Item deleted'); };
+
+        function loadAll() { loadSummary(); loadItems(); }
+        loadAll();
+        document.getElementById('filter-cat').addEventListener('change', loadItems);
+        document.getElementById('filter-stock').addEventListener('change', loadItems);
+        let t; document.getElementById('search').addEventListener('input', () => { clearTimeout(t); t = setTimeout(loadItems, 300); });
+
+        const modal = document.getElementById('modal');
+        document.getElementById('btn-add').addEventListener('click', () => { document.getElementById('modal-title').textContent = 'Add Item'; document.getElementById('item-form').reset(); document.getElementById('f-id').value = ''; document.getElementById('f-sku').disabled = false; modal.classList.add('visible'); });
+        document.getElementById('modal-close').addEventListener('click', () => modal.classList.remove('visible'));
+        modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('visible'); });
+
+        document.getElementById('item-form').addEventListener('submit', async (ev) => {
+            ev.preventDefault();
+            const id = document.getElementById('f-id').value;
+            const body = { name: document.getElementById('f-name').value, sku: document.getElementById('f-sku').value, category: document.getElementById('f-cat').value, quantity: document.getElementById('f-qty').value, reorder_level: document.getElementById('f-reorder').value, unit_price: document.getElementById('f-price').value, supplier: document.getElementById('f-supplier').value, location: document.getElementById('f-loc').value };
+            await fetch(id ? `${APP_CONFIG.API_BASE}/supply/items/${id}` : `${APP_CONFIG.API_BASE}/supply/items`, { method: id ? 'PUT' : 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token()}` }, body: JSON.stringify(body) });
+            modal.classList.remove('visible'); showToast(id ? 'Item updated' : 'Item added'); loadAll();
+        });
+        document.getElementById('logout-btn').addEventListener('click', async () => { await AuthAPI.logout(); window.location.replace('login.html'); });
+    });
+    </script>
+</body>
+</html>

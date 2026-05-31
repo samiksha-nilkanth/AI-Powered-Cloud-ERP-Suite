@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Amdox ERP Suite</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%236C5CE7'/><text x='50' y='68' font-size='50' font-weight='bold' text-anchor='middle' fill='white'>A</text></svg>">
+</head>
+<body>
+    
+    <div class="app-container" id="dashboard-page">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+
+            <div class="brand-logo" style="display: flex; align-items: center; gap: 8px;">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="40" rx="8" fill="url(#paint0_linear)"/>
+                    <path d="M20 10L30 20L20 30L10 20L20 10Z" fill="white" fill-opacity="0.9"/>
+                    <path d="M10 10L15 15" stroke="white" stroke-width="2"/>
+                    <defs>
+                        <linearGradient id="paint0_linear" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#FF512F"/>
+                            <stop offset="1" stop-color="#F09819"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h2 style="font-family: 'Inter', sans-serif; font-weight: 800; font-size: 24px; letter-spacing: 1px; margin: 0; background: -webkit-linear-gradient(#FF512F, #F09819); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">AMDOX</h2>
+            </div>
+
+</div>
+            <ul class="sidebar-nav">
+                <li><a href="dashboard.html"><span class="nav-icon">🏠</span> Dashboard</a></li>
+                <li><a href="hr.html" class=""><span class="nav-icon">👥</span> HR & Payroll</a></li>
+                <li><a href="finance.html" class=""><span class="nav-icon">💰</span> Finance</a></li>
+                <li><a href="supply.html" class=""><span class="nav-icon">📦</span> Supply Chain</a></li>
+                <li><a href="projects.html" class="active"><span class="nav-icon">📊</span> Projects</a></li>
+                <li><a href="forecast.html" class=""><span class="nav-icon">📈</span> AI Forecast</a></li>
+                <li><a href="analytics.html" class=""><span class="nav-icon">📉</span> Analytics</a></li>
+            </ul>
+        </aside>
+        
+        <main class="main-content">
+            <nav class="dashboard-nav" aria-label="Main navigation">
+                <div class="nav-user">
+                    <span id="nav-user-name" class="text-muted" style="font-size: var(--font-sm);"></span>
+                    <div id="nav-avatar" class="nav-avatar"></div>
+                    <button id="logout-btn" class="btn-logout" aria-label="Sign out">Sign Out</button>
+                </div>
+            </nav>
+            
+                        <div class="dashboard-content">
+                <div class="page-header" style="margin-bottom:var(--space-md);">
+                    <h1 style="font-size:var(--font-xxl);">📊 Project Management</h1>
+                    <p style="color:var(--text-muted); margin-top:4px;">Gantt charts, resource allocation, budget tracking, and milestone alerts.</p>
+                </div>
+                
+                <div class="dashboard-tabs" id="module-tabs">
+                    <button class="tab-btn active" data-tab="tab-projects">Projects & Tasks</button>
+                    <button class="tab-btn" data-tab="tab-gantt">Gantt Timeline</button>
+                    <button class="tab-btn" data-tab="tab-resource">Resource Allocation</button>
+                    <button class="tab-btn" data-tab="tab-budget">Budget Tracking</button>
+                </div>
+
+                <div id="tab-projects" class="tab-content active">
+                    <div class="stats-row">
+                        <div class="stat-card"><div class="stat-icon">📋</div><div><span class="stat-value" id="s-total">—</span><span class="stat-label">Active Projects</span></div></div>
+                        <div class="stat-card"><div class="stat-icon">⚠️</div><div><span class="stat-value" id="s-delayed">—</span><span class="stat-label">Delayed Tasks</span></div></div>
+                        <div class="stat-card"><div class="stat-icon">💸</div><div><span class="stat-value" id="s-budget">—</span><span class="stat-label">Total Budget</span></div></div>
+                        <div class="stat-card"><div class="stat-icon">👥</div><div><span class="stat-value" id="s-clients">—</span><span class="stat-label">Active Clients</span></div></div>
+                    </div>
+                    <div class="action-bar">
+                        <input type="text" class="search-input" id="search" placeholder="Search projects...">
+                        <select class="filter-select" id="filter-status"><option value="">All Status</option><option value="planning">Planning</option><option value="active">Active</option><option value="completed">Completed</option></select>
+                        <button class="btn-add" id="btn-add-p">+ New Project</button>
+                    </div>
+                    <div class="data-cards" id="proj-grid"></div>
+                </div>
+
+                <div id="tab-gantt" class="tab-content">
+                    <div class="coming-soon-placeholder">
+                        <div class="coming-soon-icon">🚥</div>
+                        <h3>Interactive Gantt Charts</h3>
+                        <p>Sub-second rendering of complex project timelines, milestones, and task dependencies (DAG validation).</p>
+                        <span class="module-status" style="margin-top: 16px;">Visualization Library Loading</span>
+                    </div>
+                </div>
+
+                <div id="tab-resource" class="tab-content">
+                    <div class="coming-soon-placeholder">
+                        <div class="coming-soon-icon">🧑‍💻</div>
+                        <h3>Resource Allocation Heatmap</h3>
+                        <p>Assign employees to tasks and monitor real-time utilization heatmaps to prevent burnout and overallocation.</p>
+                        <span class="module-status" style="margin-top: 16px;">HR Engine Sync Required</span>
+                    </div>
+                </div>
+
+                <div id="tab-budget" class="tab-content">
+                    <div class="coming-soon-placeholder">
+                        <div class="coming-soon-icon">📉</div>
+                        <h3>Budget & Milestone Tracking</h3>
+                        <p>Track planned vs actual budget with automatic overrun alerts when actual exceeds budget by 10%.</p>
+                        <span class="module-status" style="margin-top: 16px;">Finance API Disconnected</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="modal-overlay" id="modal"><div class="modal"><button class="modal-close" id="modal-close">✕</button><h2 id="modal-title">New Project</h2>
+        <form id="proj-form" class="modal-form"><input type="hidden" id="f-id">
+            <div class="form-group"><label>Project Name</label><input class="form-input" id="f-name" required></div>
+            <div class="form-group"><label>Description</label><input class="form-input" id="f-desc"></div>
+            <div class="form-row"><div class="form-group"><label>Status</label><select class="form-input" id="f-status"><option value="planning">Planning</option><option value="active">Active</option><option value="on_hold">On Hold</option><option value="completed">Completed</option></select></div><div class="form-group"><label>Priority</label><select class="form-input" id="f-priority"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option><option value="critical">Critical</option></select></div></div>
+            <div class="form-row"><div class="form-group"><label>Start Date</label><input type="date" class="form-input" id="f-start"></div><div class="form-group"><label>End Date</label><input type="date" class="form-input" id="f-end"></div></div>
+            <div class="form-row"><div class="form-group"><label>Budget (₹)</label><input type="number" class="form-input" id="f-budget" step="1000"></div><div class="form-group"><label>Progress (%)</label><input type="number" class="form-input" id="f-progress" min="0" max="100"></div></div>
+            <button type="submit" class="btn btn-primary" style="margin-top:var(--space-md)"><span class="btn-text">Save Project</span></button>
+        </form></div></div>
+    <div class="modal-overlay" id="task-modal"><div class="modal"><button class="modal-close" id="task-modal-close">✕</button><h2>Add Task</h2>
+        <form id="task-form" class="modal-form"><input type="hidden" id="t-projid">
+            <div class="form-group"><label>Task Title</label><input class="form-input" id="t-title" required></div>
+            <div class="form-row"><div class="form-group"><label>Status</label><select class="form-input" id="t-status"><option value="todo">To Do</option><option value="in_progress">In Progress</option><option value="review">Review</option><option value="done">Done</option></select></div><div class="form-group"><label>Priority</label><select class="form-input" id="t-priority"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option><option value="critical">Critical</option></select></div></div>
+            <div class="form-row"><div class="form-group"><label>Assignee</label><input class="form-input" id="t-assignee"></div><div class="form-group"><label>Due Date</label><input type="date" class="form-input" id="t-due"></div></div>
+            <button type="submit" class="btn btn-primary" style="margin-top:var(--space-md)"><span class="btn-text">Add Task</span></button>
+        </form></div></div>
+    <script src="js/app.js"></script><script src="js/auth.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        if (!requireAuth()) return;
+        const user = getStoredUser(); if (user) { document.getElementById('nav-user-name').textContent = user.full_name||user.email; document.getElementById('nav-avatar').textContent = getUserInitials(user.full_name); }
+        const token = () => localStorage.getItem(APP_CONFIG.TOKEN_KEY);
+        const api = (p) => fetch(`${APP_CONFIG.API_BASE}${p}`, { headers: { 'Authorization': `Bearer ${token()}` } }).then(r => r.json());
+        const fmt = (n) => '₹' + Number(n).toLocaleString('en-IN');
+
+        async function loadSummary() {
+            const r = await api('/projects/data/summary');
+            if (r.success) { document.getElementById('s-total').textContent = r.data.total; document.getElementById('s-active').textContent = r.data.active; document.getElementById('s-done').textContent = r.data.completed; document.getElementById('s-tasks').textContent = r.data.totalTasks; }
+        }
+
+        async function loadProjects() {
+            const status = document.getElementById('filter-status').value;
+            const search = document.getElementById('search').value;
+            let url = '/projects?';
+            if (status) url += `status=${status}&`;
+            if (search) url += `search=${encodeURIComponent(search)}&`;
+            const r = await api(url);
+            const grid = document.getElementById('proj-grid');
+            if (!r.success || !r.data.length) { grid.innerHTML = '<div class="empty-state"><div class="empty-icon">📋</div><p>No projects found</p></div>'; return; }
+            grid.innerHTML = r.data.map(p => `<div class="data-card">
+                <div class="data-card-header"><div><h3>${p.name}</h3><span style="color:var(--text-muted);font-size:var(--font-xs)">${p.description||''}</span></div><span class="badge badge-${p.status}">${p.status.replace('_',' ')}</span></div>
+                <div class="data-card-meta"><span>🎯 Priority: <span class="badge badge-${p.priority}">${p.priority}</span></span><span>📅 ${p.start_date||'TBD'} → ${p.end_date||'TBD'}</span><span>💰 Budget: ${fmt(p.budget)}</span></div>
+                <div class="progress-wrapper" style="margin-top:var(--space-md)"><div class="progress-bar"><div class="progress-fill" style="width:${p.progress}%"></div></div><div class="progress-text">${p.progress}% complete · ${p.taskCounts.total} tasks (${p.taskCounts.done} done)</div></div>
+                <div class="task-list" id="tasks-${p.id}"></div>
+                <div class="data-card-actions"><button class="btn-sm" onclick="toggleTasks('${p.id}')">📋 Tasks</button><button class="btn-sm" onclick="addTask('${p.id}')">+ Task</button><button class="btn-sm" onclick='editProj(${JSON.stringify(p).replace(/'/g,"&#39;")})'>Edit</button><button class="btn-sm btn-danger" onclick="delProj('${p.id}')">Delete</button></div>
+            </div>`).join('');
+        }
+
+        window.toggleTasks = async (pid) => {
+            const el = document.getElementById('tasks-' + pid);
+            if (el.innerHTML) { el.innerHTML = ''; return; }
+            const r = await api(`/projects/${pid}/tasks`);
+            if (!r.success || !r.data.length) { el.innerHTML = '<div style="padding:8px;color:var(--text-muted);font-size:var(--font-xs)">No tasks yet</div>'; return; }
+            el.innerHTML = r.data.map(t => `<div class="task-item"><span><span class="badge badge-${t.status}" style="margin-right:8px">${t.status.replace('_',' ')}</span>${t.title}</span><span style="color:var(--text-muted);font-size:var(--font-xs)">${t.assignee||''} ${t.due_date?'· '+t.due_date:''}</span></div>`).join('');
+        };
+        window.addTask = (pid) => { document.getElementById('t-projid').value = pid; document.getElementById('task-form').reset(); document.getElementById('t-projid').value = pid; document.getElementById('task-modal').classList.add('visible'); };
+        window.editProj = (p) => { document.getElementById('modal-title').textContent = 'Edit Project'; document.getElementById('f-id').value = p.id; document.getElementById('f-name').value = p.name; document.getElementById('f-desc').value = p.description||''; document.getElementById('f-status').value = p.status; document.getElementById('f-priority').value = p.priority; document.getElementById('f-start').value = p.start_date||''; document.getElementById('f-end').value = p.end_date||''; document.getElementById('f-budget').value = p.budget; document.getElementById('f-progress').value = p.progress; document.getElementById('modal').classList.add('visible'); };
+        window.delProj = async (id) => { if (!confirm('Delete project and all tasks?')) return; await fetch(`${APP_CONFIG.API_BASE}/projects/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token()}` } }); loadAll(); showToast('Project deleted'); };
+
+        function loadAll() { loadSummary(); loadProjects(); }
+        loadAll();
+        document.getElementById('filter-status').addEventListener('change', loadProjects);
+        let tm; document.getElementById('search').addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(loadProjects, 300); });
+
+        const modal = document.getElementById('modal');
+        document.getElementById('btn-add').addEventListener('click', () => { document.getElementById('modal-title').textContent = 'New Project'; document.getElementById('proj-form').reset(); document.getElementById('f-id').value = ''; modal.classList.add('visible'); });
+        document.getElementById('modal-close').addEventListener('click', () => modal.classList.remove('visible'));
+        modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('visible'); });
+
+        document.getElementById('proj-form').addEventListener('submit', async (ev) => {
+            ev.preventDefault();
+            const id = document.getElementById('f-id').value;
+            const body = { name: document.getElementById('f-name').value, description: document.getElementById('f-desc').value, status: document.getElementById('f-status').value, priority: document.getElementById('f-priority').value, start_date: document.getElementById('f-start').value, end_date: document.getElementById('f-end').value, budget: document.getElementById('f-budget').value, progress: document.getElementById('f-progress').value };
+            await fetch(id ? `${APP_CONFIG.API_BASE}/projects/${id}` : `${APP_CONFIG.API_BASE}/projects`, { method: id ? 'PUT' : 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token()}` }, body: JSON.stringify(body) });
+            modal.classList.remove('visible'); showToast(id ? 'Project updated' : 'Project created'); loadAll();
+        });
+
+        const taskModal = document.getElementById('task-modal');
+        document.getElementById('task-modal-close').addEventListener('click', () => taskModal.classList.remove('visible'));
+        taskModal.addEventListener('click', (e) => { if (e.target === taskModal) taskModal.classList.remove('visible'); });
+        document.getElementById('task-form').addEventListener('submit', async (ev) => {
+            ev.preventDefault();
+            const pid = document.getElementById('t-projid').value;
+            const body = { title: document.getElementById('t-title').value, status: document.getElementById('t-status').value, priority: document.getElementById('t-priority').value, assignee: document.getElementById('t-assignee').value, due_date: document.getElementById('t-due').value };
+            await fetch(`${APP_CONFIG.API_BASE}/projects/${pid}/tasks`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token()}` }, body: JSON.stringify(body) });
+            taskModal.classList.remove('visible'); showToast('Task added'); loadAll();
+        });
+        document.getElementById('logout-btn').addEventListener('click', async () => { await AuthAPI.logout(); window.location.replace('login.html'); });
+    });
+    </script>
+</body>
+</html>
